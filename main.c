@@ -7,6 +7,7 @@
 char board[3][3]; //Makes a 3*3 board
 const char PLAYER = 'X';
 const char COMPUTER = 'Y';
+char winner = ' ';
 
 /* Variables List */
 void resetBoard();
@@ -19,8 +20,11 @@ void printWinner(char);
 /* Main Function */
 int main() {
 
-resetBoard();
-printBoard();
+    resetBoard();
+    
+    while(winner = " " && checkFreeSpaces() !=0) {
+    printBoard();
+    }
 
     return 0;
 }
@@ -30,9 +34,9 @@ printBoard();
 // Section for reseting the board
 void resetBoard() {
 
-for(int i = 0; i < 3; i++) { // I goes from 0 to 3, incrementing by 1
-    for(int j = 0; j < 3; j++) { // J goes from 0 to 3, incrementing by 1
-        board[i][j] = ' '; // Fills each square with an empty character, resetting the board
+    for(int i = 0; i < 3; i++) { // I goes from 0 to 3, incrementing by 1
+        for(int j = 0; j < 3; j++) { // J goes from 0 to 3, incrementing by 1
+            board[i][j] = ' '; // Fills each square with an empty character, resetting the board
         }
     }   
 
@@ -47,13 +51,23 @@ void printBoard() {
     printf(" %c | %c | %c ", board[1][0], board[1][1], board[1][2]);
     printf("\n---|---|---\n");
     printf(" %c | %c | %c ", board[2][0], board[2][1], board[2][2]);
-    printf("\n---|---|---\n");
+    printf("\n");
 
 }
 
 //  Body in charge of spaces in the board
 int checkFreeSpaces() {
 
+    int freeSpaces = 9;
+
+    for(int i = 0; i < 3; i++) {
+        for(int j = 0; j < 3; j++) {
+            if(board[i][j] != ' ') {
+                freeSpaces--;
+            }
+        }
+    }
+    return freeSpaces;
 }
 
 // Body for the computer to make its' moves
