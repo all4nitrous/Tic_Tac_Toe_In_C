@@ -13,8 +13,9 @@ char winner = ' ';
 void resetBoard();
 void printBoard();
 int checkFreeSpaces();
+void playerMove();
 void computerMove();
-void checkWinner();
+char checkWinner();
 void printWinner(char);
 
 /* Main Function */
@@ -22,8 +23,11 @@ int main() {
 
     resetBoard();
     
-    while(winner = " " && checkFreeSpaces() !=0) {
+    while(winner == ' ' && checkFreeSpaces() !=0) {
     printBoard();
+
+    playerMove();
+    winner = checkWinner();
     }
 
     return 0;
@@ -70,14 +74,46 @@ int checkFreeSpaces() {
     return freeSpaces;
 }
 
+void playerMove() {
+    int x;
+    int y;
+
+    do {
+        printf("Enter row #(1-3): ");
+    scanf("%d", &x);
+    x--;
+
+    printf("Enter row #(1-3): ");
+    scanf("%d", &y);
+    y--;
+
+    if(board[x][y] != ' ') {
+        printf("Invalid move!\n");
+
+    } else {
+        board[x][y] = PLAYER;
+        break;
+
+    }
+     
+    } while(board[x][y] != ' ');
+
+}
+
 // Body for the computer to make its' moves
 void computerMove() {
 
 }
 
 // Body for checking the winner
-void checkWinner() {
+char checkWinner() {
+    // Check rows
+    for(int i = 0; i < 3; i++) {
+        if(board[i][0] == board[i][1] && board[i][0] ==board[i][2]) {
+            return board[i][0];
+        }
 
+    }
 }
 
 // Prints the winner of the game
