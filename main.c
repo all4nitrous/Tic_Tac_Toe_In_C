@@ -23,12 +23,21 @@ int main() {
 
     resetBoard();
     
-    while(winner == ' ' && checkFreeSpaces() !=0) {
+    while(winner == ' ' && checkFreeSpaces() != 0) {
     printBoard();
 
     playerMove();
     winner = checkWinner();
+    if(winner != ' ' || checkFreeSpaces() == 0) {
+        break;
     }
+
+    computerMove();
+    winner = checkWinner();
+    if(winner != ' ' || checkFreeSpaces() == 0) {
+        break;
+    }
+}
 
     return 0;
 }
@@ -102,7 +111,10 @@ void playerMove() {
 
 // Body for the computer to make its' moves
 void computerMove() {
-
+    // creates a seed that is based on the current time
+    srand(time(0));
+    int x;
+    int y;
 }
 
 // Body for checking the winner
